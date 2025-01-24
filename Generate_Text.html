@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Resonate Within Text Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: white;
+        }
+        .container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+        #background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            width: 90%;
+        }
+        .meta-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            text-align: center;
+            color: white;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resonate Within Text Generator</h1>
+    <div class="container" id="flyer">
+        <img id="background" src="background.jpg" alt="Background">
+        <div class="text-overlay" id="textOverlay">Your text here</div>
+        <div class="meta-footer">
+            Follow us @Resonate Within
+        </div>
+    </div>
+    <input type="text" id="inputText" placeholder="Enter your text here">
+    <button onclick="updateText()">Generate</button>
+    <button onclick="downloadFlyer()">Download Flyer</button>
+
+    <script>
+        function updateText() {
+            const inputText = document.getElementById("inputText").value;
+            const textOverlay = document.getElementById("textOverlay");
+            textOverlay.textContent = inputText;
+        }
+
+        function downloadFlyer() {
+            const flyer = document.getElementById("flyer");
+            html2canvas(flyer).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "flyer.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+    <!-- Add this library for rendering the flyer as an image -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>
